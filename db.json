@@ -1,0 +1,36 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "title": "Fix Login Bug",
+      "description": "Login button not working",
+      "priority": "High",
+      "status": "todo",
+      "assignee": "Anisha"
+    },
+    {
+      "id": 2,
+      "title": "Responsive Navbar",
+      "description": "Fix mobile menu",
+      "priority": "Medium",
+      "status": "progress",
+      "assignee": "Rahul"
+    },
+    {
+      "id": 3,
+      "title": "Deploy Website",
+      "description": "Deploy to Vercel",
+      "priority": "Low",
+      "status": "done",
+      "assignee": "Aman"
+    },
+    {
+      "title": "this is me ",
+      "description": "is this you and me ",
+      "priority": "Medium",
+      "assignee": "Anisha",
+      "status": "todo",
+      "id": 4
+    }
+  ]
+}
