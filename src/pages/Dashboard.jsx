@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Board from "../components/Board";
+import TicketModal from "../components/TicketModal";
 import { useTickets } from "../hooks/useTickets";
 
 function Dashboard() {
   const { data, isLoading, error } = useTickets();
+
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   if (isLoading) return <h2>Loading...</h2>;
 
@@ -17,7 +21,15 @@ function Dashboard() {
         <button>Create New Ticket</button>
       </Link>
 
-      <Board tickets={data} />
+      <Board
+        tickets={data}
+        onSelect={setSelectedTicket}
+      />
+
+      <TicketModal
+        ticket={selectedTicket}
+        onClose={() => setSelectedTicket(null)}
+      />
     </div>
   );
 }
