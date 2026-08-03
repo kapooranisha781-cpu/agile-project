@@ -1,0 +1,192 @@
+/* Dashboard */
+
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc, #eef4ff);
+  padding: 35px;
+}
+
+
+/* Header */
+
+.dashboard-header {
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  margin-bottom: 40px;
+}
+
+/* Left */
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.dashboard-header p {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* New Ticket Button */
+
+.create-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: .3s;
+  box-shadow: 0 8px 18px rgba(37,99,235,.25);
+}
+
+.create-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg,#1d4ed8,#2563eb);
+  box-shadow: 0 15px 25px rgba(37,99,235,.35);
+}
+
+.create-btn svg {
+  font-size: 18px;
+}
+
+/* Loading */
+
+.loading-container,
+.error-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.loading-container {
+  color: #2563eb;
+}
+
+.error-container {
+  color: #dc2626;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  transition: 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card svg {
+  font-size: 38px;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 28px;
+  color: #1e293b;
+}
+
+.stat-card p {
+  margin-top: 5px;
+  color: #64748b;
+}
+
+/* Card Colors */
+
+.total {
+  border-left: 6px solid #2563eb;
+}
+
+.total svg {
+  color: #2563eb;
+}
+
+.todo {
+  border-left: 6px solid #f59e0b;
+}
+
+.todo svg {
+  color: #f59e0b;
+}
+
+.progress {
+  border-left: 6px solid #8b5cf6;
+}
+
+.progress svg {
+  color: #8b5cf6;
+}
+
+.done {
+  border-left: 6px solid #10b981;
+}
+
+.done svg {
+  color: #10b981;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive */
+
+@media (max-width:900px){
+
+.dashboard{
+  padding:20px;
+}
+
+.dashboard-header{
+  flex-direction:column;
+  align-items:flex-start;
+  gap:20px;
+}
+
+.create-btn{
+  width:100%;
+  justify-content:center;
+}
+
+.dashboard-header h1{
+  font-size:28px;
+}
+}

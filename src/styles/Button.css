@@ -1,0 +1,47 @@
+.ticket-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.ticket-buttons button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.move-btn {
+  background: #0d6efd;
+}
+
+.move-btn:hover {
+  background: #0b5ed7;
+}
+
+.delete-btn {
+  background: crimson;
+}
+
+.delete-btn:hover {
+  background: #b30028;
+}
+
+
+@media (max-width:900px) {
+
+.board{
+    flex-direction:column;
+    align-items:center;
+}
+
+.column{
+    width:95%;
+}
+
+.form-container{
+    width:95%;
+}
+
+}

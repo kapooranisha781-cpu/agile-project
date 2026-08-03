@@ -5,7 +5,7 @@
       "title": "Fix Login Bug",
       "description": "Login button not working",
       "priority": "High",
-      "status": "todo",
+      "status": "done",
       "assignee": "Anisha"
     },
     {
@@ -13,7 +13,7 @@
       "title": "Responsive Navbar",
       "description": "Fix mobile menu",
       "priority": "Medium",
-      "status": "progress",
+      "status": "todo",
       "assignee": "Rahul"
     },
     {
@@ -21,8 +21,8 @@
       "title": "Deploy Website",
       "description": "Deploy to Vercel",
       "priority": "Low",
-      "status": "done",
-      "assignee": "Aman"
+      "status": "progress",
+      "assignee": "alisha"
     },
     {
       "title": "this is me ",

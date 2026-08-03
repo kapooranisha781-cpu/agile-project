@@ -1,0 +1,109 @@
+.header {
+  height: 70px;
+  background: linear-gradient(135deg, #172b4d, #0f1f3d);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+
+/* Navigation */
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #4c9aff;
+  left: 0;
+  bottom: -6px;
+  transition: .3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #4c9aff;
+}
+
+/* Profile */
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0052cc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.avatar:hover {
+  background: #0065ff;
+  transform: scale(1.08);
+}
+
+
+/* Mobile Responsive */
+
+@media(max-width:768px){
+
+.header{
+    padding:0 20px;
+}
+
+.logo{
+    font-size:20px;
+}
+
+.nav-links{
+    display:none;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    font-size:16px;
+}
+}
