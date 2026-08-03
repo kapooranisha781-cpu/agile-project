@@ -1,119 +1,284 @@
-import { useEffect, useRef } from "react";
-import { useUpdateTicket } from "../hooks/useUpdateTicket";
+import { useEffect, useRef, useState } from "react";
+import useUpdateTicket from "../hooks/useUpdateTicket";
+
+import "../styles/TicketModal.css";
+
 
 function TicketModal({ ticket, onClose }) {
-  const inputRef = useRef(null);
+
+  const titleRef = useRef(null);
 
   const { mutate } = useUpdateTicket();
 
+
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    priority: "Medium",
+    assignee: "",
+  });
+
+
+  // Load ticket data when modal opens
   useEffect(() => {
+
     if (ticket) {
-      inputRef.current.focus();
+
+      setFormData({
+        title: ticket.title || "",
+        description: ticket.description || "",
+        priority: ticket.priority || "Medium",
+        assignee: ticket.assignee || "",
+      });
+
+
+      titleRef.current?.focus();
+
     }
+
   }, [ticket]);
 
+
+
+  // Escape key close
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
+
+    function handleEscape(e) {
+
+      if (e.key === "Escape") {
         onClose();
       }
-    };
 
-    window.addEventListener("keydown", handleKeyDown);
+    }
+
+
+    document.addEventListener(
+      "keydown",
+      handleEscape
+    );
+
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+
     };
+
   }, [onClose]);
+
+
 
   if (!ticket) return null;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    const form = e.target;
+
+  const handleChange = (e) => {
+
+    const { name, value } = e.target;
+
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+  };
+
+
+
+  const handleSave = () => {
 
     mutate(
       {
-        id: ticket.id,
-        title: form.title.value,
-        description: form.description.value,
-        priority: form.priority.value,
-        assignee: form.assignee.value,
-        status: ticket.status,
-      },
-      {
-        onSuccess: () => {
-          onClose();
-        },
+        ...ticket,
+        ...formData,
       }
     );
+
+
+    onClose();
+
   };
 
+
+
   return (
-    <div className="modal-overlay" onClick={onClose}>
+
+    <div
+      className="modal-overlay"
+      onClick={onClose}
+    >
+
+
       <div
         className="modal"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) =>
+          e.stopPropagation()
+        }
       >
-        <h2>Edit Ticket</h2>
 
-        <form onSubmit={handleSubmit}>
-          <label>Title</label>
+
+        <div className="modal-header">
+
+          <h2>Edit Ticket</h2>
+
+
+          <button
+            className="close-btn"
+            onClick={onClose}
+          >
+            ✕
+          </button>
+
+        </div>
+
+
+
+        <div className="modal-body">
+
+
+          <label>
+            Title
+          </label>
+
 
           <input
-            ref={inputRef}
+
+            ref={titleRef}
+
+            type="text"
+
             name="title"
-            defaultValue={ticket.title}
+
+            value={formData.title}
+
+            onChange={handleChange}
+
           />
 
-          <label>Description</label>
+
+
+          <label>
+            Description
+          </label>
+
 
           <textarea
+
+            rows="5"
+
             name="description"
-            defaultValue={ticket.description}
+
+            value={formData.description}
+
+            onChange={handleChange}
+
           />
 
-          <label>Priority</label>
+
+
+          <label>
+            Priority
+          </label>
+
 
           <select
+
             name="priority"
-            defaultValue={ticket.priority}
+
+            value={formData.priority}
+
+            onChange={handleChange}
+
           >
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
+
+            <option value="High">
+              High
+            </option>
+
+
+            <option value="Medium">
+              Medium
+            </option>
+
+
+            <option value="Low">
+              Low
+            </option>
+
+
           </select>
 
-          <label>Assignee</label>
+
+
+
+          <label>
+            Assignee
+          </label>
+
 
           <input
+
+            type="text"
+
             name="assignee"
-            defaultValue={ticket.assignee}
+
+            value={formData.assignee}
+
+            onChange={handleChange}
+
           />
 
-          <div
-            style={{
-              display: "flex",
-              gap: "10px",
-              marginTop: "20px",
-            }}
-          >
-            <button type="submit">
-              Save Changes
-            </button>
 
-            <button
-              type="button"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+        </div>
+
+
+
+        <div className="modal-footer">
+
+
+          <button
+
+            className="cancel-btn"
+
+            onClick={onClose}
+
+          >
+
+            Cancel
+
+          </button>
+
+
+
+          <button
+
+            className="save-btn"
+
+            onClick={handleSave}
+
+          >
+
+            Save Changes
+
+          </button>
+
+
+        </div>
+
+
+
       </div>
+
+
     </div>
+
   );
+
 }
+
 
 export default TicketModal;

@@ -1,8 +1,22 @@
 import React, { useCallback } from "react";
-import { useUpdateTicket } from "../hooks/useUpdateTicket";
+import {
+  FiArrowLeft,
+  FiArrowRight,
+  FiUser,
+  FiFlag,
+  FiEdit,
+  FiTrash2,
+} from "react-icons/fi";
+
+import useUpdateTicket from "../hooks/useUpdateTicket";
+import useDeleteTicket from "../hooks/useDeleteTicket";
+
+import "../styles/Ticket.css";
+import "../styles/Button.css";
 
 function Ticket({ ticket, onSelect }) {
   const { mutate } = useUpdateTicket();
+  const { mutate: deleteTicket } = useDeleteTicket();
 
   const moveForward = useCallback(() => {
     const nextStatus = {
@@ -28,26 +42,83 @@ function Ticket({ ticket, onSelect }) {
     });
   }, [ticket, mutate]);
 
+  const handleDelete = () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this ticket?"
+    );
+
+    if (confirmDelete) {
+      deleteTicket(ticket.id);
+    }
+  };
+
   return (
-    <div className="ticket" onClick={() => onSelect(ticket)}>
+    <article className="ticket">
       <h3>{ticket.title}</h3>
-      <p>{ticket.description}</p>
-      <p>{ticket.priority}</p>
-      <p>{ticket.assignee}</p>
+
+      <p className="ticket-description">
+        {ticket.description}
+      </p>
+
+      <div className="ticket-meta">
+        <span
+          className={`priority ${ticket.priority?.toLowerCase()}`}
+        >
+          <FiFlag />
+          {ticket.priority}
+        </span>
+
+        <span className="assignee">
+          <FiUser />
+          {ticket.assignee}
+        </span>
+      </div>
 
       <div
+        className="ticket-actions"
         onClick={(e) => e.stopPropagation()}
-        style={{ display: "flex", gap: "10px" }}
       >
+        {/* Edit */}
+        <button
+          className="edit-btn"
+          onClick={() => onSelect(ticket)}
+        >
+          <FiEdit />
+          Edit
+        </button>
+
+        {/* Move Back */}
         {ticket.status !== "todo" && (
-          <button onClick={moveBackward}>←</button>
+          <button
+            className="move-btn"
+            onClick={moveBackward}
+            title="Move Back"
+          >
+            <FiArrowLeft />
+          </button>
         )}
 
+        {/* Move Forward */}
         {ticket.status !== "done" && (
-          <button onClick={moveForward}>→</button>
+          <button
+            className="move-btn"
+            onClick={moveForward}
+            title="Move Forward"
+          >
+            <FiArrowRight />
+          </button>
         )}
+
+        {/* Delete */}
+        <button
+          className="delete-btn"
+          onClick={handleDelete}
+          title="Delete Ticket"
+        >
+          <FiTrash2 />
+        </button>
       </div>
-    </div>
+    </article>
   );
 }
 

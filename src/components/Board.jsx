@@ -1,29 +1,34 @@
 import Column from "./Column";
+import "../styles/Board.css";
 
-function Board({ tickets, onSelect }) {
+const columns = [
+  {
+    title: "📋 To Do",
+    status: "todo",
+  },
+  {
+    title: "🚀 In Progress",
+    status: "progress",
+  },
+  {
+    title: "✅ Done",
+    status: "done",
+  },
+];
+
+function Board({ tickets = [], onSelect }) {
   return (
-    <div className="board">
-      <Column
-        title="📋 To Do"
-        status="todo"
-        tickets={tickets}
-        onSelect={onSelect}
-      />
-
-      <Column
-        title="🚀 In Progress"
-        status="progress"
-        tickets={tickets}
-        onSelect={onSelect}
-      />
-
-      <Column
-        title="✅ Done"
-        status="done"
-        tickets={tickets}
-        onSelect={onSelect}
-      />
-    </div>
+    <section className="board">
+      {columns.map((column) => (
+        <Column
+          key={column.status}
+          title={column.title}
+          status={column.status}
+          tickets={tickets}
+          onSelect={onSelect}
+        />
+      ))}
+    </section>
   );
 }
 

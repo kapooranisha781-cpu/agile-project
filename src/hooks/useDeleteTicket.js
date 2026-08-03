@@ -1,91 +1,53 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTicket } from "../api/ticketsApi";
+import { deleteTicket } from "../api/ticketsApi";
 import toast from "react-hot-toast";
 
-
-export default function useCreateTicket() {
-
+export default function useDeleteTicket() {
   const queryClient = useQueryClient();
 
-
   return useMutation({
+    mutationFn: deleteTicket,
 
-    mutationFn: createTicket,
-
-
-    // Instant UI update
-    onMutate: async (newTicket) => {
-
+    onMutate: async (id) => {
       await queryClient.cancelQueries({
         queryKey: ["tickets"],
       });
 
-
       const previousTickets =
         queryClient.getQueryData(["tickets"]);
 
-
-      const optimisticTicket = {
-        ...newTicket,
-        id: Date.now(),
-      };
-
-
       queryClient.setQueryData(
         ["tickets"],
-        (oldTickets = []) => [
-          ...oldTickets,
-          optimisticTicket,
-        ]
+        (oldTickets = []) =>
+          oldTickets.filter(
+            (ticket) => ticket.id !== id
+          )
       );
 
-
-      return {
-        previousTickets,
-      };
-
+      return { previousTickets };
     },
 
-
-    // If API fails rollback
-    onError: (error, newTicket, context) => {
-
+    onError: (error, id, context) => {
       if (context?.previousTickets) {
-
         queryClient.setQueryData(
           ["tickets"],
           context.previousTickets
         );
-
       }
 
+      console.error(error);
 
-      toast.error(
-        "Failed to create ticket"
-      );
-
+      toast.error("Failed to delete ticket");
     },
 
-
-    // API success
     onSuccess: () => {
-
-      toast.success(
-        "Ticket created successfully"
-      );
-
+      toast.success("Ticket deleted");
     },
 
-
-    // Sync with server
     onSettled: () => {
-
       queryClient.invalidateQueries({
         queryKey: ["tickets"],
       });
-
     },
-
   });
-
 }

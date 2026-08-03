@@ -1,29 +1,45 @@
+import { useMemo } from "react";
 import Ticket from "./Ticket";
+import "../styles/Column.css";
 
 function Column({
   title,
   status,
-  tickets,
+  tickets = [],
   onSelect,
 }) {
-  const filteredTickets = tickets.filter(
-    (ticket) => ticket.status === status
-  );
+  const filteredTickets = useMemo(() => {
+    return tickets.filter(
+      (ticket) => ticket.status === status
+    );
+  }, [tickets, status]);
 
   return (
-    <div className="column">
-      <h2>
-        {title} ({filteredTickets.length})
-      </h2>
+    <section className="column">
+      <div className="column-header">
+        <h2>{title}</h2>
 
-      {filteredTickets.map((ticket) => (
-        <Ticket
-          key={ticket.id}
-          ticket={ticket}
-          onSelect={onSelect}
-        />
-      ))}
-    </div>
+        <span className="ticket-count">
+          {filteredTickets.length}
+        </span>
+      </div>
+
+      <div className="ticket-list">
+        {filteredTickets.length === 0 ? (
+          <p className="empty-column">
+            No tickets
+          </p>
+        ) : (
+          filteredTickets.map((ticket) => (
+            <Ticket
+              key={ticket.id}
+              ticket={ticket}
+              onSelect={onSelect}
+            />
+          ))
+        )}
+      </div>
+    </section>
   );
 }
 

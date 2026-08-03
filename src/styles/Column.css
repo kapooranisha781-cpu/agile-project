@@ -1,0 +1,116 @@
+/* Column.css */
+
+.column {
+  width: 100%;
+  min-height: 450px;
+  background: #ebecf0;
+  border-radius: 14px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 15px rgba(9, 30, 66, 0.08);
+  transition: all 0.3s ease;
+}
+
+.column:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(9, 30, 66, 0.15);
+}
+
+/* Column Header */
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.column-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #172b4d;
+}
+
+/* Ticket Count */
+
+.ticket-count {
+  background: #dfe1e6;
+  color: #172b4d;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Tickets Container */
+
+.ticket-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: 330px;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Scrollbar */
+
+.ticket-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ticket-list::-webkit-scrollbar-thumb {
+  background: #b5bcc8;
+  border-radius: 10px;
+}
+
+.ticket-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Empty State */
+
+.empty-column {
+  text-align: center;
+  color: #6b778c;
+  padding: 30px 10px;
+  font-size: 14px;
+}
+
+/* Status Colors */
+
+.column:nth-child(1) {
+  border-top: 5px solid #0d6efd;
+}
+
+.column:nth-child(2) {
+  border-top: 5px solid #ffab00;
+}
+
+.column:nth-child(3) {
+  border-top: 5px solid #36b37e;
+}
+
+/* Tablet */
+
+@media(max-width:1024px){
+
+  .column {
+    min-height: 400px;
+  }
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+  .column {
+    width: 100%;
+    min-height: auto;
+  }
+}

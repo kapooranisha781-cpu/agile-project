@@ -1,17 +1,28 @@
 import api from "./api";
 
-export const getTickets = async () => {
-  const response = await api.get("/tickets");
-  return response.data;
-};
+// Get All Tickets
+export async function getTickets() {
+  const { data } = await api.get("/tickets");
+  return data;
+}
 
-export const createTicket = async (ticket) => {
-  const response = await api.post("/tickets", ticket);
-  return response.data;
-};
+// Create Ticket
+export async function createTicket(ticket) {
+  const { data } = await api.post("/tickets", ticket);
+  return data;
+}
 
-// NEW
-export const updateTicket = async (ticket) => {
-  const response = await api.patch(`/tickets/${ticket.id}`, ticket);
-  return response.data;
-};
+// Update Ticket
+export async function updateTicket(ticket) {
+  const { data } = await api.patch(
+    `/tickets/${ticket.id}`,
+    ticket
+  );
+
+  return data;
+}
+
+// Delete Ticket
+export async function deleteTicket(id) {
+  await api.delete(`/tickets/${id}`);
+}
